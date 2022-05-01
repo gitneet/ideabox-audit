@@ -55,6 +55,8 @@ class Author:
 
   @classmethod
   def new(cls, author_json, authors):
+    if(not author_json):
+      return(authors["deadbeef-dead-beef-dead-beefdeadbe"])
     uuid = author_json["id"]
     if(uuid in authors):
       return(authors[uuid])
@@ -131,6 +133,7 @@ def get_comments(uuid):
 def main():
   ideas = {}
   authors = {}
+  authors["deadbeef-dead-beef-dead-beefdeadbe"] = Author("deadbeef-dead-beef-dead-beefdeadbe", "DELETED")
   ideas_json = get_json("https://demo-api.ideabox.cloud/v1/ideas?sort=date_entered&order=DESC&lang=ja")
   idea_uuids = list(map(lambda idea: idea["id"], ideas_json))
   for idea_uuid in idea_uuids:
